@@ -7,9 +7,10 @@ from mlflow.tracking import MlflowClient
 class Trainer:
 
     MLFLOW_URI = "https://mlflow.lewagon.co/"
+    EXPERIMENT_NAME = "test_experiment"
 
     def __init__(self):
-        self.experiment_name = "test_experiment"
+        pass
 
     # method name will be used as a param name !
     @memoized_property
@@ -21,9 +22,9 @@ class Trainer:
     @memoized_property
     def mlflow_experiment_id(self):
         try:
-            return self.mlflow_client.create_experiment(self.experiment_name)
+            return self.mlflow_client.create_experiment(self.EXPERIMENT_NAME)
         except BaseException:
-            return self.mlflow_client.get_experiment_by_name(self.experiment_name).experiment_id
+            return self.mlflow_client.get_experiment_by_name(self.EXPERIMENT_NAME).experiment_id
 
     # in a loop must be created a new run ! so, NO @memoized_property here !
     #@memoized_property
@@ -47,17 +48,15 @@ class Trainer:
 
     def train_1(self):
 
-        EXPERIMENT_NAME = "test_experiment"
-
         # Indicate mlflow to log to remote server
         mlflow.set_tracking_uri(self.MLFLOW_URI)
 
         client = MlflowClient()
 
         try:
-            experiment_id = client.create_experiment(EXPERIMENT_NAME)
+            experiment_id = client.create_experiment(self.EXPERIMENT_NAME)
         except BaseException:
-            experiment_id = client.get_experiment_by_name(EXPERIMENT_NAME).experiment_id
+            experiment_id = client.get_experiment_by_name(self.EXPERIMENT_NAME).experiment_id
 
         for model in ["linear", "Randomforest"]:
             run = client.create_run(experiment_id)
@@ -68,5 +67,14 @@ class Trainer:
 
 trainer = Trainer()
 trainer.train()
+
+# to find experiment id on the server:
+experiment_id = trainer.mlflow_experiment_id
+print(f"experiment URL: https://mlflow.lewagon.co/#/experiments/{experiment_id}")
+
+# or by name:
+experiment_id = MlflowClient().get_experiment_by_name(trainer.EXPERIMENT_NAME).experiment_id
+print(f"experiment URL: https://mlflow.lewagon.co/#/experiments/{experiment_id}")
+
 #trainer.train_1()  # like in ml_flow_test_lw/py
 
