@@ -86,6 +86,7 @@ class Trainer:
         trainer = Trainer(X_train, y_train)
         trainer.run()
         trainer.evaluate(X_test, y_test)
+        # trainer.save_pipeline()
 
 
 if __name__ == "__main__":
