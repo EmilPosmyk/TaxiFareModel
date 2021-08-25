@@ -1,0 +1,15 @@
+artifact_uri: file:///home/xyz/code/EmilPosmyk/TaxiFareModel/mlruns/1/fd3e6496e41a4030a9c72285f7ee532c/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: fd3e6496e41a4030a9c72285f7ee532c
+run_uuid: fd3e6496e41a4030a9c72285f7ee532c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1629911301924
+status: 1
+tags: []
+user_id: unknown

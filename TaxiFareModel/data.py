@@ -13,12 +13,12 @@ def get_data(nrows=10_000):
 
 def holdout(df):
 
-    x = df.drop("fare_amount", axis=1)
+    X = df.drop("fare_amount", axis=1)
     y = df["fare_amount"]
 
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
 
-    return x_train, x_test, y_train, y_test
+    return X_train, X_test, y_train, y_test
 
 
 def clean_data(df, test=False):
