@@ -1,5 +1,5 @@
 import numpy as np
-
+import time
 
 def haversine_vectorized(df,
                          start_lat="pickup_latitude",
@@ -28,6 +28,17 @@ def haversine_vectorized(df,
 
 def compute_rmse(y_pred, y_true):
     return np.sqrt(((y_pred - y_true) ** 2).mean())
+
+
+def time_tracker(method):
+    def decorator_function(*args, **kwargs):
+        start = time.time()
+        result = method(*args, **kwargs)
+        end = time.time()
+        print("\nLet's check execution time:", end - start, "\n")
+        return result
+
+    return decorator_function
 
 
 def haversine_distance(df,

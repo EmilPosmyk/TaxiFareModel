@@ -6,7 +6,7 @@ from mlflow.tracking import MlflowClient
 from memoized_property import memoized_property
 
 from TaxiFareModel.pipeline import TaxiFarePipeline
-from TaxiFareModel.utils import compute_rmse
+from TaxiFareModel.utils import compute_rmse, time_tracker
 from TaxiFareModel.data import get_data, holdout
 
 
@@ -34,6 +34,7 @@ class Trainer:
 
         # print(self.pipeline)
 
+    @time_tracker  # displays result from jupiter notebook
     def run(self):
         """set and train the pipeline"""
 
@@ -71,7 +72,7 @@ class Trainer:
         return TaxiFarePipeline.create_pipeline()
 
     @staticmethod
-    def call_like_notebook():
+    def call_like_notebook(self):
 
         from sklearn.model_selection import train_test_split
         from TaxiFareModel.data import get_data, clean_data
@@ -98,4 +99,5 @@ if __name__ == "__main__":
     # evaluate
     print('TODO')
 
-    Trainer.call_like_notebook()
+    # Trainer.call_like_notebook()
+
